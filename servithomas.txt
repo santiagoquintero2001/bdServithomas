@@ -1,0 +1,90 @@
+create database servithomas
+
+use servithomas 
+
+create table trabajador{
+id_trabajador int identity,
+nombre_trabajador varchar (50) unique,
+telefono_trabajador int not null,
+constraint apodotrabajador primary key(id_trabajador))
+insert into trabajador values (1234,'Carlos Bermúdez',4978865)
+insert into trabajador values (12345,'Esteban Zapata',4970022)
+select * from trabajador
+
+create table carroceria(
+placa_carroceria int not null,
+tipo_carroceria varchar (30) not null,
+tamaño_carroceria int not null,
+constraint apodocarroceria primary key (placa_carroceria))
+insert into carroceria values(456,'Estaca',7.5)
+insert into carroceria values(722,'Aluminio',5)
+select * from carroceria
+
+create table herramienta(
+id_herramienta int identity,
+nombre_herramienta varchar (30) unique,
+cantidad_herramienta int not null
+constraint apodoherramienta primary key(id_herramienta))
+insert into herramienta values('Metro',5)
+insert into herramienta values('Pulidora',6)
+insert into herramienta values('Remachadora',4)
+select * from herramienta
+
+create table trabajador_carroceria(
+id_trabajador1 int,
+placacarroceria1 int,
+constraint aopodotrabajadorcarroceria foreign key(id_trabajador1) references trabajador (id_trabajador),
+constraint aopodotrabajadorcarroceria1 foreign key(placacarroceria1) references carroceria(placacarroceria))
+insert into trabajador_carroceria values(1234,456)
+insert into trabajador_carroceria values(12345,722)
+select * from trabajador_carroceria
+
+create table carroceria_herramienta(
+id_herramienta1 int,
+placacarroceria2 int,
+constraint apodocarroceriaherramienta foreign key(id_herramienta1) references herramienta(id_herramienta),
+constraint apodocarroceriaherramienta1 foreign key(placacarroceria2) references carroceria(placacarroceria)
+insert into carroceria_herramienta values(001,722)
+insert into carroceria_herramienta values(002,456)
+select * from carroceria_herramienta
+
+create table proveedor(
+id_proveedor int noy null,
+tipoHerramienta varchar (30) unique,
+precio int not null,
+constraint apodoproveedor primary key (id_proveedor))
+insert into proveedor values(002,'Metros',4000)
+insert into proveedor values(001,'Máquinas',174000)
+select * from trabajador proveedor
+
+create table herramienta_proveedor(
+id_proveedor1 int,
+id_herramienta3 int,
+constraint apodoherramientaproveedor foreign key(id_proveedor1) references proveedor(id_proveedor),
+constraint apodoherramientaproveedor1 foreign key(id_herramienta3) references herramienta(id_herramienta))
+insert into herramienta_proveedor values(002,1)
+insert into herramienta_proveedor values(001,2)
+select * from herramienta_proveedor
+
+create table prestamo(
+id_prestamo int identity,
+fechaprestamo varchar(15) not null,
+id_trabajador2 int not null,
+constraint apodoprestamo primary key(id_prestamo),
+constraint apodoprestamo1 foreign key(id_trabajador2) references trabajador(id_trabajador))
+insert into prestamo values('18/11/2020',1234)
+insert into prestamo values('16/11/2020',12345)
+select * from prestamo
+
+create table prestamo_herramienta(
+id_prestamo1 int,
+id_herramienta4 int,
+constraint apodoprestamoherramienta foreign key(id_prestamo1) references prestamo(id_prestamo),
+constraint apodoprestamoherramienta1 foreign key(id_herramienta4) references herramienta(id_herramienta))
+insert into prestamo_herramienta values(1,1)
+insert into prestamo_herramienta values(2,3)
+insert into prestamo_herramienta values(3,2)
+select * from prestamo_herramienta
+
+
+
